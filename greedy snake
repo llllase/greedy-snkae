@@ -16,7 +16,7 @@ typedef struct studen
 	int m;
 	int food;
 } stp;
-void m0p(stp *s)
+void map(stp *s)
 {
 	int i, j, k;
 	for (i = 0; i < 50; i++)
@@ -38,7 +38,7 @@ void m0p(stp *s)
 	s->food = 0;
 //	s->point = 0;
 }
-void put(stp *s)
+void output(stp *s)
 {
 	int i, j, k;
 	while(1)
@@ -72,7 +72,7 @@ void put(stp *s)
 		system("cls");
 	}
 }
-void upp(stp *s)
+void up(stp *s)
 {
 	int i, j, k;
 	int now = 0;
@@ -99,7 +99,7 @@ void upp(stp *s)
 		s->a[s->x[0]][s->y[0]] = 'O';
 	}
 }
-void donn(stp *s)
+void donw(stp *s)
 {
 	int now = 0;
 	if (s->a[s->x[0] + 1][s->y[0]] == '$')
@@ -120,7 +120,7 @@ void donn(stp *s)
 		s->a[s->x[0]][s->y[0]]='O';
 	}
 }
-void leff(stp *s)
+void left(stp *s)
 {
 	int now = 0;
 	if (s->a[s->x[0]][s->y[0] - 1] == '$')
@@ -141,7 +141,7 @@ void leff(stp *s)
 		s->a[s->x[0]][s->y[0]]='O';
 	}
 }
-void righh(stp *s)
+void right(stp *s)
 {
 	int now = 0;
 	if (s->a[s->x[0]][s->y[0] + 1] == '$')
@@ -171,16 +171,16 @@ void skp(stp *s)
 		switch (s->f)
 		{
 		case 1:
-			upp(s);
+			up(s);
 			break;
 		case 2:
-			donn(s);
+			down(s);
 			break;
 		case 3:
-			leff(s);
+			left(s);
 			break;
 		case 4:
-			righh(s);
+			right(s);
 			break;
 		}
 		for (i = 1; i < s->n; i++)
@@ -215,14 +215,14 @@ void eat(stp *s)
 		}
 	}
 }
-void snake()
+void main()
 {
 	stp s;
-	m0p(&s);
+	map(&s);
 	pthread_t th1;
 	pthread_t th2;
 	pthread_t th3;
-	pthread_create(&th1, NULL, put, &s);
+	pthread_create(&th1, NULL, output, &s);
 	pthread_create(&th2, NULL, skp, &s);
 	pthread_create(&th3, NULL, eat, &s);
 	while(1)
